@@ -1,0 +1,161 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Happy Birthday Anjali ❤️</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:linear-gradient(135deg,#ffe0ef,#fff0f5,#ffd6e7);font-family:Arial,sans-serif;color:#a52b60;text-align:center}
+section{min-height:100vh;padding:35px 18px;display:flex;flex-direction:column;justify-content:center;align-items:center}
+h1{color:#e83e83;font-size:clamp(30px,8vw,48px)}
+p{font-size:18px;line-height:1.7}
+.card{background:#ffffffdc;padding:25px;border-radius:24px;width:100%;max-width:480px;box-shadow:0 8px 25px #e7a3c2;margin:12px auto}
+button{border:0;border-radius:30px;padding:13px 23px;background:#ed4b91;color:white;font-size:16px;margin:9px;cursor:pointer}
+input{padding:13px;border:2px solid pink;border-radius:20px;text-align:center;font-size:18px;width:190px}
+.hidden{display:none!important}
+#photo{width:100%;max-width:280px;height:320px;object-fit:cover;border:12px solid white;border-bottom:35px solid white;box-shadow:0 8px 20px #d58aa9;transform:rotate(-3deg)}
+#letter{background:#fff0f7;padding:20px;border-radius:15px}
+#scratch{background:#ed91ba;color:white;padding:30px;border-radius:18px;max-width:400px;cursor:pointer}
+.heart{position:fixed;top:-30px;animation:fall 6s linear infinite;pointer-events:none}
+@keyframes fall{to{transform:translateY(110vh) rotate(360deg)}}
+.shake{animation:shake .3s}
+@keyframes shake{25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+#noBtn{position:relative}
+</style>
+</head>
+<body>
+<div id="hearts"></div>
+<button onclick="toggleMusic()" style="position:fixed;right:8px;top:8px;z-index:10">🎵 Music ON/OFF</button>
+
+<section id="lock">
+<div class="card" id="lockCard">
+<h1>🎀 A Little Surprise 🎀</h1>
+<p>Only for our Birthday Girl!</p>
+<input id="pass" type="password" placeholder="Secret passcode">
+<br><button onclick="unlock()">Unlock 💗</button>
+<p id="error"></p>
+</div>
+</section>
+
+<section id="welcome" class="hidden">
+<h1>Hey Anjali! 💕</h1>
+<p>A little surprise is waiting for you...</p>
+<button onclick="music();show('birthday')">Open Your Surprise 🎁</button>
+</section>
+
+<section id="birthday" class="hidden">
+<h1>🎉 Happy Birthday Anjali! 🎉</h1>
+<div style="font-size:100px">🎂</div>
+<p>May your day be full of smiles, love and happiness! 💗</p>
+<p>🎈 🎈 🎈 🎈 🎈</p>
+<button onclick="show('message')">Next Surprise 💌</button>
+</section>
+
+<section id="message" class="hidden">
+<div class="card">
+<h2>A Little Message For You ❣️</h2>
+<p>Happy birthday kalooti ❣️<br>
+Door hoon to yahan se itna hi surprise de sakta hoon baki tu hamesha khus rahe aur life me tarraki kare</p>
+<button onclick="show('gallery')">Next 📸</button>
+</div>
+</section>
+
+<section id="gallery" class="hidden">
+<h1>Memory Gallery 📸</h1>
+<div class="card">
+<img id="photo" src="anjali.jpg" alt="Anjali's photo">
+<p>One picture, so many memories! 💗</p>
+</div>
+<button onclick="show('question')">Next Surprise</button>
+</section>
+
+<section id="question" class="hidden">
+<div class="card">
+<h1>Are u mad? 🤨</h1>
+<button onclick="document.getElementById('answer').innerHTML='I knew it! 😂❤️ Never change!'">YES 😂</button>
+<button id="noBtn" onclick="runAway()">NO 😇</button>
+<p id="answer"></p>
+<button onclick="show('letterSection')">Next Surprise 💌</button>
+</div>
+</section>
+
+<section id="letterSection" class="hidden">
+<h1>A Secret Letter 💌</h1>
+<div style="font-size:85px;cursor:pointer" onclick="openLetter()">💌</div>
+<p>Tap the envelope</p>
+<div id="letter" class="card hidden">
+<h2>Dear Anjali,</h2>
+<p>Distance may keep us apart today, but it can't stop me from sending you a little happiness. Keep smiling, keep dreaming and keep shining. You deserve so many beautiful things. Happy Birthday! ❣️</p>
+</div>
+<button onclick="show('scratchSection')">Next Surprise ✨</button>
+</section>
+
+<section id="scratchSection" class="hidden">
+<h1>Scratch & Reveal 🎁</h1>
+<p>Tap the card to reveal your special wish!</p>
+<div id="scratch" onclick="revealWish()">✨ Scratch Here ✨</div>
+<button onclick="show('final')">Finish the Surprise 🎆</button>
+</section>
+
+<section id="final" class="hidden">
+<h1>🎆 Happy Birthday Anjali! 🎆</h1>
+<div style="font-size:75px">🎂🎉💖🎈</div>
+<p>Did you like your surprise, Anjali?</p>
+<button onclick="document.getElementById('finalAnswer').innerHTML='Yayyy! Mission successful! 😂💕'">YES ❤️</button>
+<button onclick="document.getElementById('finalAnswer').innerHTML='Not accepted! 😂 Try again!'">NO 🙄</button>
+<h2 id="finalAnswer"></h2>
+<p>Keep smiling, Birthday Girl! ❣️</p>
+</section>
+
+<script>
+function show(id){
+document.querySelectorAll('section').forEach(s=>s.classList.add('hidden'));
+document.getElementById(id).classList.remove('hidden');
+window.scrollTo(0,0);
+}
+function unlock(){
+if(document.getElementById('pass').value==='1609'){
+document.getElementById('error').innerText='';
+show('welcome');
+}else{
+document.getElementById('error').innerText="Oops! Wrong Passcode 😜 Try again, birthday girl! 💗 Hint: It's a secret number 😉";
+let c=document.getElementById('lockCard');
+c.classList.remove('shake');void c.offsetWidth;c.classList.add('shake');
+}
+}
+document.getElementById('pass').addEventListener('keydown',e=>{if(e.key==='Enter')unlock()});
+function runAway(){
+let b=document.getElementById('noBtn');
+b.style.transform=`translate(${Math.random()*180-90}px,${Math.random()*100-50}px)`;
+}
+function openLetter(){document.getElementById('letter').classList.toggle('hidden')}
+function revealWish(){
+document.getElementById('scratch').innerHTML="Anjali, hamesha khush rehna, khulkar muskurana aur apne har sapne ko poora karna.<br><br>Teri life mein kabhi khushiyon ki kami na ho. Har naya din tere liye kuch beautiful lekar aaye.<br><br>Tu jaisi hai, waisi hi rehna — thodi pagal, thodi naughty aur bahut special! 😂❣️<br><br>Keep shining, Birthday Girl! ✨";
+}
+let audio=null,playing=false;
+function music(){
+if(!audio){
+audio=new Audio('https://cdn.pixabay.com/audio/2022/10/25/audio_946b3f2c5d.mp3');
+audio.loop=true;audio.volume=.35;
+}
+audio.play().catch(()=>{});
+playing=true;
+}
+function toggleMusic(){
+if(!audio){music();return}
+if(playing){audio.pause();playing=false}
+else{audio.play().catch(()=>{});playing=true}
+}
+for(let i=0;i<20;i++){
+let h=document.createElement('div');
+h.className='heart';h.innerHTML='💗';
+h.style.left=Math.random()*100+'%';
+h.style.animationDelay=Math.random()*6+'s';
+h.style.fontSize=(15+Math.random()*20)+'px';
+document.getElementById('hearts').appendChild(h);
+}
+</script>
+</body>
+</html>
